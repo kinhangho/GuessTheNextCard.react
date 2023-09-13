@@ -3,8 +3,11 @@ import Card from '../../Component/Card/Card.js';
 import { shuffle } from '../utils/utils.js';
 import PlayerSelection from '../PlayerSelection/PlayerSelection.js';
 import './Game.css';
+import cardImages from '../cardImages/cardImages.js';
+import { fetchCardFromAPI } from '../api/api.js'; // Import the API function
 
-  
+ 
+
 function Game() {
   const [gameState, setGameState] = useState('notStarted');
   const [deck, setDeck] = useState([]);
@@ -50,9 +53,9 @@ function Game() {
   const startGame = (numPlayers) => {
     if (deck.length > 0) {
       setGameState('playing');
-      setCurrentCard(deck.pop());
+      fetchCardFromAPI(); // Call the function to fetch a card from the API
       setNumPlayers(numPlayers);
-
+  
       const initialPlayers = [];
       for (let i = 0; i < numPlayers; i++) {
         initialPlayers.push({ name: `Player ${i + 1}`, healthCards: 0, score: 0 });
@@ -60,6 +63,8 @@ function Game() {
       setPlayers(initialPlayers);
     }
   };
+  
+  
 
   const updatePlayerScore = (points) => {
     const updatedPlayers = [...players];
@@ -211,9 +216,9 @@ function Game() {
   };
 
   function canPassFunction() {
-    // Check if the player has chosen to pass or has a correct guess
-    return !hasChosenToPass[currentPlayerIndex] && hasCorrectGuess;
+    return hasCorrectGuess;
   }
+  const currentCardImage = cardImages[`${currentCard.rank}${currentCard.suit}`];
 
   return (
     <div className={`game-container ${gameState === 'playing' ? 'playing' : ''}`}>
@@ -245,6 +250,7 @@ function Game() {
        </div>
 
           <p>Current Player: {players[currentPlayerIndex].name}</p>
+          <img src={cardImages[`${currentCard.rank}${currentCard.suit}`]} alt={currentCard.rank} />
 
           <div>
             <div
