@@ -1,0 +1,175 @@
+/* src/components/Game.css */
+
+/* Base styling for the game container */
+.game-container {
+   flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  font-family: Arial, sans-serif;
+  text-align: center;
+  padding: 20px;
+}
+
+/* Header styles */
+h1 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+/* Styling for individual cards */
+.card {
+  width: 150px;
+  height: 200px;
+  background-color: #fff; /* Default background color */
+  border: 1px solid #ccc;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+  font-size: 18px;
+  margin-bottom: 20px;
+}
+
+/* Styling for paragraphs within .card */
+.card p {
+  margin: 0;
+  text-align: center; /* Center-align the text within the card */
+}
+
+/* Additional styling for red cards (Hearts and Diamonds) */
+.card.red {
+  background-color: red;
+  color: red; /* You can adjust text color for better visibility */
+}
+
+/* Additional styling for black cards (Clubs and Spades) */
+.card.black {
+  background-color: black;
+  color: black; /* You can adjust text color for better visibility */
+}
+
+
+/* Styling for buttons */
+button {
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 16px;
+  margin: 5px;
+  cursor: pointer;
+  border-radius: 5px;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+button:hover {
+  background-color: #0056b3;
+}
+
+/* Styling for paragraphs outside .card */
+p {
+  font-size: 16px;
+  margin: 0;
+}
+
+/* Additional styling for the game components can be added here */
+
+/* Styling for the card container */
+.card-container {
+  position: relative;
+  width: 300px;
+  height: 400px;
+  margin: 0 auto;
+  background-color: #fff;
+  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.2);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+/* Styling for the card itself */
+.card {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Styling for the buttons (pass and continue) */
+.buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 20px;
+  padding: 0 20px;
+}
+
+.pass-button,
+.continue-button {
+  padding: 10px 20px;
+  font-size: 16px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  outline: none;
+  transition: background-color 0.3s ease;
+}
+
+.pass-button {
+  background-color: #ff6b6b;
+  color: white;
+}
+
+.continue-button {
+  background-color: #4caf50;
+  color: white;
+}
+
+.pass-button:hover {
+  background-color: #ff3d3d;
+}
+
+.continue-button:hover {
+  background-color: #45a049;
+}
+/* In your Game.css file */
+
+/* Style the player-info container */
+.player-info {
+  display: flex;
+  justify-content: space-around;
+}
+
+/* Style each player container */
+.player-container {
+  background-color: #f0f0f0;
+  padding: 20px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin: 10px;
+  width: 200px;
+}
+
+/* Style the player name (Player 1, Player 2) */
+.player-container h2 {
+  margin: 0;
+  font-size: 24px;
+  color: #333;
+}
+
+/* Style the player details (Health Cards and Score) */
+.player-details p {
+  font-size: 18px;
+  margin: 10px 0;
+}
+
+/* Style the values (0 and 1) */
+.player-details span {
+  font-weight: bold;
+  color: #007bff; /* Blue color for values */
+}

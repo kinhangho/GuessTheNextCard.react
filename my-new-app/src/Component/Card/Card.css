@@ -1,0 +1,31 @@
+.card-container {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    margin: 10px;
+    width: 100px;
+    height: 150px;
+    display: inline-block;
+    text-align: center;
+    background-color: #fff;
+    box-shadow: 0px 0px 5px rgba(0, 0, 0, 0.3);
+  }
+  
+  .card-suit {
+    font-size: 18px;
+    font-weight: bold;
+  }
+  
+  .card-rank {
+    font-size: 24px;
+    margin-top: 10px;
+  }
+  
+  .card-color-red {
+    color: red;
+  }
+  
+  .card-color-black {
+    color: black;
+  }
+  
