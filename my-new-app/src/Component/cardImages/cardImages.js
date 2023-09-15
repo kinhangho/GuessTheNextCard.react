@@ -1,6 +1,6 @@
 // cardImages.js
-
 const cardImages = {
+
     '2C': 'https://deckofcardsapi.com/static/img/2C.png',
     '2D': 'https://deckofcardsapi.com/static/img/2D.png',
     '2H': 'https://deckofcardsapi.com/static/img/2H.png',

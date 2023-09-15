@@ -4,7 +4,7 @@ import { shuffle } from '../utils/utils.js';
 import PlayerSelection from '../PlayerSelection/PlayerSelection.js';
 import './Game.css';
 import cardImages from '../cardImages/cardImages.js';
-import { fetchCardFromAPI } from '../api/api.js'; // Import the API function
+import { fetchCardFromAPI } from '../api/api.js';  
 
  
 
@@ -24,6 +24,8 @@ function Game() {
   const [currentPlayerCorrectGuess, setCurrentPlayerCorrectGuess] = useState(false);
   const [hasChosenToPass, setHasChosenToPass] = useState(Array(1).fill(false)); // Initialize as an array
   const [canPass, setCanPass] = useState(true);
+  const [currentCardImage, setCurrentCardImage] = useState('');
+
 
   function initializeDeck() {
     const suits = ['Hearts', 'Diamonds', 'Clubs', 'Spades'];
@@ -64,7 +66,19 @@ function Game() {
     }
   };
   
-  
+  useEffect(() => {
+    // Call the function to fetch a card from the API
+    fetchCardFromAPI()
+      .then((newCard) => {
+        // Assuming newCard contains the card data with suit and rank
+        setCurrentCard(newCard); // Update currentCard state
+        const newCardImage = cardImages[`${newCard.rank}${newCard.suit}`];
+        setCurrentCardImage(newCardImage); // Update currentCardImage state
+      })
+      .catch((error) => {
+        console.error('Error fetching card:', error);
+      });
+  }, []);
 
   const updatePlayerScore = (points) => {
     const updatedPlayers = [...players];
@@ -218,40 +232,38 @@ function Game() {
   function canPassFunction() {
     return hasCorrectGuess;
   }
-  const currentCardImage = cardImages[`${currentCard.rank}${currentCard.suit}`];
-
+ 
   return (
     <div className={`game-container ${gameState === 'playing' ? 'playing' : ''}`}>
       <h1>Guess the Next Card</h1>
-
       {gameState === 'notStarted' && (
         <div>
           <h2>Start a New Game</h2>
           <PlayerSelection onStartGame={startGame} />
         </div>
       )}
-
+  
       {gameState === 'playing' && (
-       <div>
-       <div className="player-info">
-         {players.map((player, index) => (
-           <div key={index} className="player-container">
-             <h2>Player {index + 1}</h2>
-             <div className="player-details">
-               <p>
-                 Health Cards: <span>{player.healthCards}</span>
-               </p>
-               <p>
-                 Score: <span>{player.score}</span>
-               </p>
-             </div>
-           </div>
-         ))}
-       </div>
+        <div>
+          <div className="player-info">
+            {players.map((player, index) => (
+              <div key={index} className="player-container">
+                <h2>Player {index + 1}</h2>
+                <div className="player-details">
+                  <p>
+                    Health Cards: <span>{player.healthCards}</span>
+                  </p>
+                  <p>
+                    Score: <span>{player.score}</span>
+                  </p>
 
+                </div>
+              </div>
+            ))}
+          </div>
+  
           <p>Current Player: {players[currentPlayerIndex].name}</p>
-          <img src={cardImages[`${currentCard.rank}${currentCard.suit}`]} alt={currentCard.rank} />
-
+   
           <div>
             <div
               className={`card ${
@@ -260,10 +272,11 @@ function Game() {
                   : 'black'
               }`}
             >
-              <Card card={currentCard} />
+
+          <Card currentCard={currentCard} />
             </div>
           </div>
-
+  
           {currentCard.rank === 'J' || currentCard.rank === 'Q' || currentCard.rank === 'K' ? (
             <>
               <p>Choose Color:</p>
@@ -277,19 +290,19 @@ function Game() {
               <button onClick={() => handleGuess(false)}>Lower</button>
             </>
           )}
-
+  
           {healthCards === 1 && (
             <button onClick={handleUseHealthCard} disabled={players[currentPlayerIndex].healthCards === 0}>
               Use Health Card
             </button>
           )}
-
+  
           {healthCards === 2 && (
             <button onClick={handleUseHealthCard} disabled={players[currentPlayerIndex].healthCards === 0}>
               Use Health Cards
             </button>
           )}
-
+  
           {healthCards === 2 && showModal && (
             <div className="modal">
               <p>Choose an Option:</p>
@@ -297,11 +310,11 @@ function Game() {
               <button onClick={handleFlip}>Flip -2</button>
             </div>
           )}
-
-{canPass && (
-  <button onClick={handlePass}>Pass</button>
-)}
-
+  
+          {canPass && (
+            <button onClick={handlePass}>Pass</button>
+          )}
+  
           {deck.length === 0 && (
             <button onClick={initializeDeck}>Reset Game</button>
           )}
@@ -309,6 +322,7 @@ function Game() {
       )}
     </div>
   );
+  
 }
 
 export default Game;

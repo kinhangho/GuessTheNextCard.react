@@ -1,13 +1,17 @@
+// card.js
 import React from 'react';
-import './Card.css';
+import cardImages from '../cardImages/cardImages.js';
 
-
-function Card({ card }) {
-  const cardColorClass = card.color === 'Red' ? 'red-card' : 'black-card';
+function Card({ currentCard }) {
+  // Generate the image key using the format used in cardImages
+  const imageKey = `${currentCard.rank}${currentCard.suit.charAt(0)}`;
 
   return (
-    <div className={`card ${cardColorClass}`}>
-      <p>{`${card.rank} of ${card.suit}`}</p>
+    <div className="card">
+      <img
+        src={cardImages[imageKey]}
+        alt={`${currentCard.rank} of ${currentCard.suit}`}
+      />
     </div>
   );
 }
