@@ -307,7 +307,7 @@ function Game() {
             <div className="modal">
               <p>Choose an Option:</p>
               <button onClick={handleSkip}>Skip -1</button>
-              <button onClick={handleFlip}>Flip -2</button>
+              {/* <button onClick={handleFlip}>Flip -2</button> */}
             </div>
           )}
   
